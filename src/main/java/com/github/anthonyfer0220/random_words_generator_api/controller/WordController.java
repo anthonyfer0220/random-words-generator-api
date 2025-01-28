@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.anthonyfer0220.random_words_generator_api.model.Word;
+import com.github.anthonyfer0220.random_words_generator_api.service.ApiService;
 import com.github.anthonyfer0220.random_words_generator_api.service.WordService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class WordController {
 
     private final WordService wordService;
+    private final ApiService apiService;
 
-    public WordController(WordService wordService) {
+    public WordController(WordService wordService, ApiService apiService) {
         this.wordService = wordService;
+        this.apiService = apiService;
     }
 
     @GetMapping
@@ -41,6 +44,12 @@ public class WordController {
     public ResponseEntity<Object> createWord(@RequestBody Word word) {
         return wordService.newWord(word);
     }
+
+    @PostMapping("/populate")
+    public ResponseEntity<Object> populateDB() {
+        return apiService.populateDatabase();
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateWordById(@PathVariable Integer id, @RequestBody Word updatedWord) {
