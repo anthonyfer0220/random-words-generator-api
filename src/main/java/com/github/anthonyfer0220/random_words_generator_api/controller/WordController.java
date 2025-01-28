@@ -113,4 +113,14 @@ public class WordController {
         return wordService.deleteWord(id);
     }
 
+    /**
+     * Delete all words in the database
+     * 
+     * @return A 200 status if deletion is successful
+     */
+    @DeleteMapping
+    public ResponseEntity<Object> deleteAllWords() {
+        return wordService.deleteAllWords();
+    }
+
 }
