@@ -37,6 +37,10 @@ public class WordService {
         return ResponseEntity.ok(word);
     }
 
+    public Word getRandomWord() {
+        return wordRepository.selectRandomWord();
+    }
+
     public ResponseEntity<Object> newWord(Word word) {
         
         wordRepository.save(word);

@@ -3,19 +3,11 @@ package com.github.anthonyfer0220.random_words_generator_api.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.anthonyfer0220.random_words_generator_api.model.Word;
 import com.github.anthonyfer0220.random_words_generator_api.service.ApiService;
 import com.github.anthonyfer0220.random_words_generator_api.service.WordService;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -40,6 +32,11 @@ public class WordController {
         return wordService.getWordById(id);
     }
 
+    @GetMapping("/random")
+    public Word getRandWord() {
+        return wordService.getRandomWord();
+    }
+
     @PostMapping
     public ResponseEntity<Object> createWord(@RequestBody Word word) {
         return wordService.newWord(word);
@@ -49,7 +46,6 @@ public class WordController {
     public ResponseEntity<Object> populateDB() {
         return apiService.populateDatabase();
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateWordById(@PathVariable Integer id, @RequestBody Word updatedWord) {
