@@ -1,4 +1,4 @@
-package com.github.anthonyfer0220.random_words_generator_api.word;
+package com.github.anthonyfer0220.random_words_generator_api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

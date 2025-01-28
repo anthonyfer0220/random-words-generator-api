@@ -1,4 +1,4 @@
-package com.github.anthonyfer0220.random_words_generator_api.word;
+package com.github.anthonyfer0220.random_words_generator_api.controller;
 
 import java.util.List;
 
@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.anthonyfer0220.random_words_generator_api.model.Word;
+import com.github.anthonyfer0220.random_words_generator_api.service.WordService;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

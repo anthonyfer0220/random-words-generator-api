@@ -1,4 +1,4 @@
-package com.github.anthonyfer0220.random_words_generator_api.word;
+package com.github.anthonyfer0220.random_words_generator_api.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.github.anthonyfer0220.random_words_generator_api.model.Word;
+import com.github.anthonyfer0220.random_words_generator_api.repository.WordRepository;
 
 
 @Service
