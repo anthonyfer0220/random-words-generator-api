@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class WordService {
 
@@ -17,7 +18,7 @@ public class WordService {
     }
 
     public List<Word> getWords() {
-        return this.wordRepository.findAll();
+        return wordRepository.findAll();
     }
 
     public ResponseEntity<Object> getWordById(Integer id) {

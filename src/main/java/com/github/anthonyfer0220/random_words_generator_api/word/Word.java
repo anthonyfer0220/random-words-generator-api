@@ -3,6 +3,7 @@ package com.github.anthonyfer0220.random_words_generator_api.word;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name = "word")
