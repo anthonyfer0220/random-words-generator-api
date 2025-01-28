@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.github.anthonyfer0220.random_words_generator_api.model.Word;
 import com.github.anthonyfer0220.random_words_generator_api.repository.WordRepository;
 
-
+/**
+ * Provides business logic for Word operations
+ */
 @Service
 public class WordService {
 
@@ -21,10 +23,22 @@ public class WordService {
         this.wordRepository = wordRepository;
     }
 
+    /**
+     * Fetch a paginated list of words
+     * 
+     * @param pageable Pageable object specifying the page and size
+     * @return A Page of words
+     */
     public Page<Word> getWords(Pageable pageable) {
         return wordRepository.findAll(pageable);
     }
 
+    /**
+     * Fetch a word by ID
+     * 
+     * @param id The ID of the word to fetch
+     * @return A ResponseEntity containing the word or a 404 status
+     */
     public ResponseEntity<Object> getWordById(Integer id) {
 
         Optional<Word> wordOptional = wordRepository.findById(id);
@@ -38,16 +52,34 @@ public class WordService {
         return ResponseEntity.ok(word);
     }
 
+    /**
+     * Fetch a random word from the database
+     * 
+     * @return A random word
+     */
     public Word getRandomWord() {
         return wordRepository.selectRandomWord();
     }
 
+    /**
+     * Create a new word
+     * 
+     * @param word The word to save
+     * @return A ResponseEntity with the saved word and a 201 status
+     */
     public ResponseEntity<Object> newWord(Word word) {
         
         wordRepository.save(word);
         return new ResponseEntity<>(word, HttpStatus.CREATED);
     }
 
+    /**
+     * Update an existing word in the database
+     * 
+     * @param id The ID of the word to update
+     * @param updatedWord The updated word
+     * @return A ResponseEntity with the updated word or a 404 status if not found
+     */
     public ResponseEntity<Object> updateWord(Integer id, Word updatedWord) {
 
         Optional<Word> wordOptional = wordRepository.findById(id);
@@ -63,6 +95,12 @@ public class WordService {
         return ResponseEntity.ok(existingWord);
     }
 
+    /**
+     * Delete a word by ID
+     * 
+     * @param id The ID of the word to delete
+     * @return A ResponseEntity indicating the status of the deletion
+     */
     public ResponseEntity<Object> deleteWord(Integer id) {
         
         Optional<Word> wordOptional = wordRepository.findById(id);

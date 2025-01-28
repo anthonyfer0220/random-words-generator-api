@@ -22,6 +22,9 @@ import org.springframework.stereotype.Service;
 import com.github.anthonyfer0220.random_words_generator_api.model.Word;
 import com.github.anthonyfer0220.random_words_generator_api.repository.WordRepository;
 
+/**
+ * Handles external API calls and database population
+ */
 @Service
 public class ApiService {
 
@@ -35,6 +38,11 @@ public class ApiService {
             this.wordRepository = wordRepository;
     }
 
+    /**
+     * Fetch words from the Datamuse API using randomized patterns
+     * 
+     * @return A list of Word objects fetched from the API
+     */
     public List<Word> fetchWordsFromApi() {
 
         List<String> patterns = new ArrayList<>();
@@ -67,6 +75,15 @@ public class ApiService {
 
     }
 
+    /**
+     * Send an HTTP request to the Datamuse API for a given pattern
+     * 
+     * @param pattern The word pattern to query
+     * @return The HTTP response containing the API result
+     * @throws IOException If the API call fails
+     * @throws InterruptedException If the API call is interrupted
+     */
+
     private HttpResponse<String> fetchApiResponse(String pattern) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.datamuse.com/words?sp=" + pattern + "&max=" + MAX_WORDS_PER_PATTERN))
@@ -75,6 +92,12 @@ public class ApiService {
                 return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    /**
+     * Parse the API response JSON into a list of Word objects
+     * 
+     * @param responseBody The JSON response from the API
+     * @return A list of Word objects parsed from the response
+     */
     private List<Word> parse(String responseBody) {
 
         JSONArray wordsJson = new JSONArray(responseBody);
@@ -94,12 +117,17 @@ public class ApiService {
         return words;
     }
 
+    /**
+     * Populate the database with words fetched from the Datamuse API
+     * 
+     * @return A ResponseEntity with the status of the action
+     */
     public ResponseEntity<Object> populateDatabase() {
         
         List<Word> words = fetchWordsFromApi();
         wordRepository.saveAll(words);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully populated " + words.size() + " words in the database.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully populated the words in the database.");
     }
 
 }
