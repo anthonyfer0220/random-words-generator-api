@@ -1,8 +1,9 @@
 package com.github.anthonyfer0220.random_words_generator_api.service;
 
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class WordService {
         this.wordRepository = wordRepository;
     }
 
-    public List<Word> getWords() {
-        return wordRepository.findAll();
+    public Page<Word> getWords(Pageable pageable) {
+        return wordRepository.findAll(pageable);
     }
 
     public ResponseEntity<Object> getWordById(Integer id) {
