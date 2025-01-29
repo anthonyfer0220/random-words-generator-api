@@ -81,11 +81,12 @@ public class WordController {
     }
 
     /**
-     * Populate the database with random words fetched from an external API
+     * Replace all words in the database with random words fetched from an external API
+     * If database is empty, it will populate it
      * 
      * @return The status of the population action
      */
-    @PostMapping("/populate")
+    @PutMapping
     public ResponseEntity<Object> populateDB() {
         return apiService.populateDatabase();
     }

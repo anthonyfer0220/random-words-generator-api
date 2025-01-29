@@ -118,16 +118,23 @@ public class ApiService {
     }
 
     /**
-     * Populate the database with words fetched from the Datamuse API
+     * Populate or replace the database with words fetched from the Datamuse API
      * 
      * @return A ResponseEntity with the status of the action
      */
     public ResponseEntity<Object> populateDatabase() {
         
+        boolean hasWords = wordRepository.count() > 0;
+
+        if (hasWords) {
+            wordRepository.deleteAll();
+        }
+
         List<Word> words = fetchWordsFromApi();
+
         wordRepository.saveAll(words);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully populated the words in the database.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully populated the database with new words.");
     }
 
 }
