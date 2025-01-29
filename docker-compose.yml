@@ -1,13 +1,8 @@
 services:
   random-words-api:
     container_name: random-words-api
-    # The following is for development
-    image: maven:3.9-eclipse-temurin-21
-    working_dir: /app
-    volumes: 
-      - .:/app
-    command: mvn spring-boot:run
-    # Until here. Will be changed once done
+    image: random-words-api
+    build: .
     ports:
       - 8080:8080
     environment:

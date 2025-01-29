@@ -1,7 +1,9 @@
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jdk
 
-RUN mkdir /opt/app
+WORKDIR /app
 
-COPY target/random-words-generator-api-0.0.1-SNAPSHOT.jar /opt/app/japp.jar
+COPY . /app
 
-ENTRYPOINT [ "java", "-jar", "/opt/app/japp.jar" ]
+RUN ./mvnw clean package
+
+ENTRYPOINT [ "java", "-jar", "/app/target/random-words-generator-api-0.0.1-SNAPSHOT.jar" ]

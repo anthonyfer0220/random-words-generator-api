@@ -96,6 +96,22 @@ public class WordService {
     }
 
     /**
+     * Delete all words in the database
+     * 
+     * @return A ResponseEntity indicating the status of the deletion
+     */
+    public ResponseEntity<Object> deleteAllWords() {
+        
+        if (wordRepository.count() == 0) {
+            return ResponseEntity.noContent().build();
+        }
+
+        wordRepository.deleteAll();
+
+        return ResponseEntity.ok("All words have been deleted");
+    }
+
+    /**
      * Delete a word by ID
      * 
      * @param id The ID of the word to delete
@@ -112,22 +128,6 @@ public class WordService {
         wordRepository.deleteById(id);
 
         return ResponseEntity.ok().build();
-    }
-
-    /**
-     * Delete all words in the database
-     * 
-     * @return A ResponseEntity indicating the status of the deletion
-     */
-    public ResponseEntity<Object> deleteAllWords() {
-        
-        if (wordRepository.count() == 0) {
-            return ResponseEntity.noContent().build();
-        }
-
-        wordRepository.deleteAll();
-
-        return ResponseEntity.ok("All words have been deleted");
     }
     
 }

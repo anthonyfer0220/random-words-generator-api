@@ -102,6 +102,16 @@ public class WordController {
     public ResponseEntity<Object> updateWordById(@PathVariable Integer id, @RequestBody Word updatedWord) {
         return wordService.updateWord(id, updatedWord);
     }
+
+    /**
+     * Delete all words in the database
+     * 
+     * @return A 200 status if deletion is successful
+     */
+    @DeleteMapping
+    public ResponseEntity<Object> deleteAllWords() {
+        return wordService.deleteAllWords();
+    }
     
     /**
      * Delete a word by ID
@@ -112,16 +122,6 @@ public class WordController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteWordById(@PathVariable Integer id) {
         return wordService.deleteWord(id);
-    }
-
-    /**
-     * Delete all words in the database
-     * 
-     * @return A 200 status if deletion is successful
-     */
-    @DeleteMapping
-    public ResponseEntity<Object> deleteAllWords() {
-        return wordService.deleteAllWords();
     }
 
 }
