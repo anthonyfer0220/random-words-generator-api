@@ -1,6 +1,19 @@
 services:
-  api_db:
-    container_name: api_db
+  random-words-api:
+    container_name: random-words-api
+    image: random-words-api
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://random-words-db:5432/random_words_generator
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - random-words-db
+
+  random-words-db:
+    container_name: random-words-db
     image: postgres:17
     ports:
       - 5432:5432
